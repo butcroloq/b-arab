@@ -231,6 +231,26 @@
           <p id="menuMascotSpeech" class="text-xs sm:text-sm text-slate-600 font-medium max-w-xl">
             Pilih unit tajuk di bawah. Setiap unit mempunyai 3 SET soalan berbeza (15 soalan/set). Kumpul ⭐ Bintang dan dapatkan Sijil Kejayaan kamu!
           </p>
+
+          <form method="get" action="" accept-charset="UTF-8" class="mt-4 bg-emerald-50 border-2 border-emerald-300 rounded-2xl p-3 sm:p-4">
+            <label for="menuStudentNameInput" class="block text-sm font-extrabold text-emerald-900 mb-2">
+              👤 Nama Murid
+            </label>
+            <div class="flex flex-col sm:flex-row gap-2">
+              <input
+                type="text"
+                id="menuStudentNameInput"
+                name="studentName"
+                required
+                autocomplete="name"
+                placeholder="Taip nama murid di sini"
+                class="flex-1 min-w-0 px-4 py-3 rounded-xl border-2 border-emerald-600 bg-white focus:outline-none focus:ring-4 focus:ring-amber-300 font-extrabold text-lg text-slate-800 shadow-sm"
+              />
+              <button type="submit" class="px-5 py-3 bg-arabic-emerald hover:bg-emerald-700 text-amber-300 font-extrabold rounded-xl shadow-lg border-2 border-arabic-gold active:scale-95 transition whitespace-nowrap">
+                💾 Simpan Nama
+              </button>
+            </div>
+          </form>
         </div>
       </div>
 
@@ -884,6 +904,11 @@
 
     class QuizApp {
       constructor() {
+        const submittedName = new URLSearchParams(window.location.search).get('studentName');
+        if (submittedName && submittedName.trim()) {
+          localStorage.setItem('ba6_student_name', submittedName.trim());
+        }
+
         this.state = {
           studentName: localStorage.getItem('ba6_student_name') || '',
           language: localStorage.getItem('ba6_lang') || 'BM',
@@ -1007,6 +1032,7 @@
         document.getElementById('headerSubtitle').innerText = dict.subtitle;
         document.getElementById('navStudentName').innerText = this.state.studentName || 'Murid';
         document.getElementById('displayStudentName').innerText = this.state.studentName || 'Murid';
+        document.getElementById('menuStudentNameInput').value = this.state.studentName || '';
         document.getElementById('starCounter').innerText = this.state.stars;
         document.getElementById('langText').innerText = this.state.language;
         document.getElementById('soundBtn').innerText = this.state.soundEnabled ? '🔊' : '🔇';
