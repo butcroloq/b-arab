@@ -507,6 +507,61 @@
   <script>
     // Web Audio API Synthesizer for retro/friendly sound effects
     // Expanded Question Bank with 3 SETS PER UNIT (15 questions per set = 180 questions total)
+    const soundFx = {
+      context: null,
+
+      getContext() {
+        if (!window.AudioContext && !window.webkitAudioContext) return null;
+        if (!this.context) {
+          const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+          this.context = new AudioContextClass();
+        }
+        if (this.context.state === 'suspended') {
+          this.context.resume().catch(() => {});
+        }
+        return this.context;
+      },
+
+      tone(frequency, duration = 0.12, delay = 0, type = 'sine') {
+        if (!window.app || !window.app.state.soundEnabled) return;
+        try {
+          const ctx = this.getContext();
+          if (!ctx) return;
+          const oscillator = ctx.createOscillator();
+          const gain = ctx.createGain();
+          const start = ctx.currentTime + delay;
+          oscillator.type = type;
+          oscillator.frequency.setValueAtTime(frequency, start);
+          gain.gain.setValueAtTime(0.0001, start);
+          gain.gain.exponentialRampToValueAtTime(0.16, start + 0.015);
+          gain.gain.exponentialRampToValueAtTime(0.0001, start + duration);
+          oscillator.connect(gain);
+          gain.connect(ctx.destination);
+          oscillator.start(start);
+          oscillator.stop(start + duration + 0.02);
+        } catch (error) {
+          console.warn('Bunyi tidak dapat dimainkan:', error);
+        }
+      },
+
+      playCorrect() {
+        this.tone(523.25, 0.12, 0, 'sine');
+        this.tone(659.25, 0.14, 0.1, 'sine');
+        this.tone(783.99, 0.18, 0.2, 'sine');
+      },
+
+      playIncorrect() {
+        this.tone(220, 0.16, 0, 'triangle');
+        this.tone(174.61, 0.22, 0.12, 'triangle');
+      },
+
+      playVictory() {
+        [523.25, 659.25, 783.99, 1046.5].forEach((note, index) => {
+          this.tone(note, 0.22, index * 0.12, 'sine');
+        });
+      }
+    };
+
     const QUESTION_BANK = {
       // UNIT 1: KEBERSIHAN DIRI & PERALATAN (3 SETS)
       unit1_set1: [
@@ -1328,10 +1383,15 @@
       }
     }
 
-    let app;
-    window.onload = function() {
-      app = new QuizApp();
-    };
+    function startApp() {
+      if (!window.app) window.app = new QuizApp();
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', startApp, { once: true });
+    } else {
+      startApp();
+    }
   </script>
 </body>
 </html>
