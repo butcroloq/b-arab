@@ -107,7 +107,7 @@
   <header class="bg-arabic-emerald text-white shadow-lg border-b-4 border-arabic-gold sticky top-0 z-30">
     <div class="max-w-5xl mx-auto px-4 py-3 flex items-center justify-between">
       <!-- Title & Branding -->
-      <div class="flex items-center space-x-3 cursor-pointer" onclick="app.requestShowMenu()">
+      <div class="flex items-center space-x-3 cursor-pointer" data-app-action="requestShowMenu">
         <div class="w-10 h-10 rounded-full bg-arabic-gold flex items-center justify-center text-slate-900 font-bold text-xl shadow-md border-2 border-amber-100">
           🌙
         </div>
@@ -130,17 +130,17 @@
         </div>
 
         <!-- Language Switcher Button -->
-        <button onclick="app.toggleLanguage()" id="langBtn" class="bg-emerald-800 hover:bg-emerald-700 border border-emerald-600 px-2.5 py-1 rounded-lg text-xs font-semibold tracking-wider transition duration-150 flex items-center gap-1">
+        <button type="button" data-app-action="toggleLanguage" id="langBtn" class="bg-emerald-800 hover:bg-emerald-700 border border-emerald-600 px-2.5 py-1 rounded-lg text-xs font-semibold tracking-wider transition duration-150 flex items-center gap-1">
           🌐 <span id="langText">BM</span>
         </button>
 
         <!-- Sound Toggle -->
-        <button onclick="app.toggleSound()" id="soundBtn" class="bg-emerald-800 hover:bg-emerald-700 border border-emerald-600 p-1.5 rounded-lg text-sm transition duration-150">
+        <button type="button" data-app-action="toggleSound" id="soundBtn" class="bg-emerald-800 hover:bg-emerald-700 border border-emerald-600 p-1.5 rounded-lg text-sm transition duration-150">
           🔊
         </button>
 
         <!-- Student Name Badge -->
-        <button onclick="app.openNameModal()" class="bg-amber-500 hover:bg-amber-400 text-slate-900 px-3 py-1 rounded-full font-bold text-xs shadow transition flex items-center gap-1.5 border border-amber-200">
+        <button type="button" data-app-action="openNameModal" class="bg-amber-500 hover:bg-amber-400 text-slate-900 px-3 py-1 rounded-full font-bold text-xs shadow transition flex items-center gap-1.5 border border-amber-200">
           👤 <span id="navStudentName" class="max-w-[90px] sm:max-w-[140px] truncate">Murid</span>
         </button>
       </div>
@@ -191,12 +191,12 @@
 
         <div>
           <label id="lblNameInput" class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-2">Nama Murid / Student Name:</label>
-          <input type="text" id="inputStudentName" placeholder="Contoh: Ahmad Zaki" class="w-full px-4 py-3 rounded-xl border-2 border-emerald-600 focus:outline-none focus:ring-2 focus:ring-amber-400 font-semibold text-slate-800 shadow-sm" />
+          <input type="text" id="inputStudentName" placeholder="Taip nama murid di sini" autocomplete="name" class="w-full px-5 py-4 rounded-2xl border-3 border-emerald-600 focus:outline-none focus:ring-4 focus:ring-amber-300 font-extrabold text-xl sm:text-2xl text-slate-800 shadow-md" />
           <p id="nameErrorMsg" class="text-xs text-red-600 font-bold mt-1 hidden">⚠️ Sila masukkan nama murid dahulu.</p>
         </div>
 
-        <button onclick="app.saveStudentName()" class="w-full py-3.5 bg-arabic-emerald hover:bg-emerald-700 text-amber-300 font-bold rounded-xl text-base shadow-lg hover:shadow-xl transition transform active:scale-95 border-2 border-arabic-gold flex items-center justify-center gap-2">
-          <span>🚀</span> <span id="btnStartGame">Simpan & Mula Pengembaraan</span>
+        <button type="button" data-app-action="saveStudentName" class="w-full py-3.5 bg-arabic-emerald hover:bg-emerald-700 text-amber-300 font-bold rounded-xl text-base shadow-lg hover:shadow-xl transition transform active:scale-95 border-2 border-arabic-gold flex items-center justify-center gap-2">
+          <span>💾</span> <span id="btnStartGame">Simpan Nama & Mula Pengembaraan</span>
         </button>
       </div>
     </section>
@@ -244,7 +244,7 @@
     <section id="quizSection" class="hidden space-y-4 max-w-3xl mx-auto w-full">
       <!-- Header Quiz Info Bar -->
       <div class="bg-white rounded-2xl p-4 shadow-md border-2 border-emerald-600 flex items-center justify-between gap-2">
-        <button onclick="app.requestShowMenu()" class="px-3 py-1.5 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl text-xs font-bold flex items-center gap-1 transition">
+        <button type="button" data-app-action="requestShowMenu" class="px-3 py-1.5 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl text-xs font-bold flex items-center gap-1 transition">
           ⬅️ <span id="btnBackToMenu">Menu Utama</span>
         </button>
 
@@ -316,7 +316,7 @@
 
         <!-- Next Question Button -->
         <div class="mt-6 text-right">
-          <button id="btnNextQuestion" onclick="app.nextQuestion()" class="hidden w-full sm:w-auto px-6 py-3 bg-arabic-emerald hover:bg-emerald-700 text-amber-300 font-extrabold rounded-xl shadow-lg transition transform active:scale-95 items-center justify-center gap-2">
+          <button type="button" id="btnNextQuestion" data-app-action="nextQuestion" class="hidden w-full sm:w-auto px-6 py-3 bg-arabic-emerald hover:bg-emerald-700 text-amber-300 font-extrabold rounded-xl shadow-lg transition transform active:scale-95 items-center justify-center gap-2">
             <span id="lblNextBtn">Soalan Seterusnya</span> <span>➡️</span>
           </button>
         </div>
@@ -369,27 +369,27 @@
       <!-- Action Buttons Grid -->
       <div class="space-y-3">
         <!-- Main Certificate Modal Trigger -->
-        <button onclick="app.openCertificate()" class="w-full py-3.5 bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-slate-900 font-extrabold rounded-2xl shadow-xl transition transform active:scale-95 border-2 border-amber-200 flex items-center justify-center gap-2 text-base">
+        <button type="button" data-app-action="openCertificate" class="w-full py-3.5 bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-slate-900 font-extrabold rounded-2xl shadow-xl transition transform active:scale-95 border-2 border-amber-200 flex items-center justify-center gap-2 text-base">
           📜 <span id="btnViewCert">KLIK SIJIL (Lihat & Cetak)</span>
         </button>
 
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
           <!-- WhatsApp Share -->
-          <button onclick="app.shareWhatsApp()" class="py-2.5 bg-green-600 hover:bg-green-700 text-white font-bold rounded-xl text-xs shadow transition flex items-center justify-center gap-1.5">
+          <button type="button" data-app-action="shareWhatsApp" class="py-2.5 bg-green-600 hover:bg-green-700 text-white font-bold rounded-xl text-xs shadow transition flex items-center justify-center gap-1.5">
             💬 <span id="btnShareWA">Hantar WhatsApp</span>
           </button>
 
           <!-- Email Share -->
-          <button onclick="app.shareEmail()" class="py-2.5 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-xl text-xs shadow transition flex items-center justify-center gap-1.5">
+          <button type="button" data-app-action="shareEmail" class="py-2.5 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-xl text-xs shadow transition flex items-center justify-center gap-1.5">
             ✉️ <span id="btnShareEmail">Hantar e-Mel</span>
           </button>
         </div>
 
         <div class="grid grid-cols-2 gap-2.5 pt-2">
-          <button onclick="app.retryCurrentUnit()" class="py-2.5 bg-slate-200 hover:bg-slate-300 text-slate-800 font-bold rounded-xl text-xs transition flex items-center justify-center gap-1">
+          <button type="button" data-app-action="retryCurrentUnit" class="py-2.5 bg-slate-200 hover:bg-slate-300 text-slate-800 font-bold rounded-xl text-xs transition flex items-center justify-center gap-1">
             🔄 <span id="btnRetry">Cuba Lagi</span>
           </button>
-          <button onclick="app.showMenu()" class="py-2.5 bg-arabic-emerald hover:bg-emerald-800 text-amber-300 font-bold rounded-xl text-xs transition flex items-center justify-center gap-1">
+          <button type="button" data-app-action="showMenu" class="py-2.5 bg-arabic-emerald hover:bg-emerald-800 text-amber-300 font-bold rounded-xl text-xs transition flex items-center justify-center gap-1">
             🏠 <span id="btnReturnMenu">Menu Utama</span>
           </button>
         </div>
@@ -402,7 +402,7 @@
   <div id="certificateModal" class="fixed inset-0 bg-slate-900/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-3 sm:p-6 overflow-y-auto">
     <div class="bg-white rounded-3xl max-w-2xl w-full p-2 sm:p-4 relative shadow-2xl">
       <!-- Close Button (hidden during print) -->
-      <button onclick="app.closeCertificate()" class="no-print absolute top-3 right-3 w-9 h-9 bg-slate-200 hover:bg-slate-300 text-slate-800 rounded-full font-bold text-lg flex items-center justify-center z-20">
+      <button type="button" data-app-action="closeCertificate" class="no-print absolute top-3 right-3 w-9 h-9 bg-slate-200 hover:bg-slate-300 text-slate-800 rounded-full font-bold text-lg flex items-center justify-center z-20">
         ✕
       </button>
 
@@ -458,7 +458,7 @@
   <!-- MODAL: SET SELECTION MODAL -->
   <div id="setSelectModal" class="fixed inset-0 bg-slate-900/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
     <div class="bg-white rounded-3xl max-w-md w-full p-6 relative shadow-2xl border-4 border-arabic-gold space-y-5">
-      <button onclick="app.closeSetModal()" class="absolute top-4 right-4 w-8 h-8 bg-slate-100 hover:bg-slate-200 rounded-full font-bold text-slate-600 flex items-center justify-center">✕</button>
+      <button type="button" data-app-action="closeSetModal" class="absolute top-4 right-4 w-8 h-8 bg-slate-100 hover:bg-slate-200 rounded-full font-bold text-slate-600 flex items-center justify-center">✕</button>
 
       <div class="text-center space-y-1">
         <span id="modalUnitTag" class="text-xs font-extrabold px-3 py-1 rounded-full bg-amber-100 text-amber-800 border border-amber-300">Unit 1</span>
@@ -479,10 +479,10 @@
       <h3 class="text-lg font-bold text-slate-800">Kembali ke Menu Utama?</h3>
       <p class="text-xs text-slate-600 font-medium">Kemajuan soalan semasa anda tidak akan disimpan.</p>
       <div class="flex items-center justify-center gap-3 pt-2">
-        <button onclick="app.closeExitModal()" class="flex-1 py-2.5 bg-slate-200 hover:bg-slate-300 text-slate-800 font-bold rounded-xl text-xs">
+        <button type="button" data-app-action="closeExitModal" class="flex-1 py-2.5 bg-slate-200 hover:bg-slate-300 text-slate-800 font-bold rounded-xl text-xs">
           Batal
         </button>
-        <button onclick="app.forceGoToMenu()" class="flex-1 py-2.5 bg-arabic-emerald hover:bg-emerald-800 text-amber-300 font-bold rounded-xl text-xs shadow">
+        <button type="button" data-app-action="forceGoToMenu" class="flex-1 py-2.5 bg-arabic-emerald hover:bg-emerald-800 text-amber-300 font-bold rounded-xl text-xs shadow">
           Ya, Menu Utama
         </button>
       </div>
@@ -491,15 +491,15 @@
 
   <!-- MODAL: CHANGE NAME MODAL -->
   <div id="changeNameModal" class="fixed inset-0 bg-slate-900/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
-    <div class="bg-white rounded-3xl max-w-sm w-full p-6 space-y-4 shadow-2xl border-2 border-arabic-gold">
-      <h3 class="text-base font-bold text-slate-800 text-center">Kemaskini Nama Murid</h3>
+    <div class="bg-white rounded-3xl max-w-lg w-full p-7 sm:p-8 space-y-6 shadow-2xl border-4 border-arabic-gold">
+      <h3 class="text-xl sm:text-2xl font-extrabold text-slate-800 text-center">Isi Nama Murid</h3>
       <div>
-        <label class="block text-xs font-bold text-slate-600 mb-1">Nama Baru:</label>
-        <input type="text" id="modalInputName" class="w-full px-3 py-2 border-2 border-emerald-600 rounded-xl font-bold text-slate-800 focus:outline-none" />
+        <label class="block text-sm font-bold text-slate-700 mb-2">Nama Murid:</label>
+        <input type="text" id="modalInputName" placeholder="Taip nama murid di sini" autocomplete="name" class="w-full px-5 py-4 border-3 border-emerald-600 rounded-2xl font-extrabold text-xl sm:text-2xl text-slate-800 focus:outline-none focus:ring-4 focus:ring-amber-300 shadow-md" />
       </div>
-      <div class="flex gap-2">
-        <button onclick="app.closeNameModal()" class="flex-1 py-2 bg-slate-200 hover:bg-slate-300 text-slate-800 font-bold rounded-xl text-xs">Batal</button>
-        <button onclick="app.saveModalName()" class="flex-1 py-2 bg-arabic-emerald text-amber-300 font-bold rounded-xl text-xs shadow">Simpan</button>
+      <div class="flex flex-col-reverse sm:flex-row gap-3">
+        <button type="button" data-app-action="closeNameModal" class="sm:flex-1 py-3.5 bg-slate-200 hover:bg-slate-300 text-slate-800 font-bold rounded-xl text-sm">Batal</button>
+        <button type="button" data-app-action="saveModalName" class="sm:flex-[2] py-3.5 bg-arabic-emerald hover:bg-emerald-700 text-amber-300 font-extrabold rounded-xl text-base shadow-lg border-2 border-arabic-gold">💾 Simpan Nama</button>
       </div>
     </div>
   </div>
@@ -837,7 +837,7 @@
         welcomeTitle: "Selamat Datang ke Misi Bahasa Arab Tahun 6!",
         welcomeSpeech: "Saya **Ustaz Ameer**, pembimbing Bahasa Arab kamu! Sila masukkan nama kamu dahulu untuk memulakan cabaran pengembaraan ilmu ini.",
         lblName: "Nama Murid / Student Name:",
-        btnStart: "Simpan & Mula Pengembaraan",
+        btnStart: "Simpan Nama & Mula Pengembaraan",
         greetingBadge: "Ahlan wa Sahlan!",
         greetingTitle: "Selamat Datang,",
         menuSpeech: "Pilih unit tajuk di bawah. Setiap unit mengandungi 15 soalan objektif pelbagai aras. Kumpul ⭐ Bintang dan dapatkan Sijil Kejayaan kamu!",
@@ -861,7 +861,7 @@
         welcomeTitle: "Welcome to Year 6 Arabic Quiz Mission!",
         welcomeSpeech: "I am **Ustaz Ameer**, your Arabic guide! Please enter your name to begin this fun learning adventure.",
         lblName: "Student Name:",
-        btnStart: "Save & Start Adventure",
+        btnStart: "Save Name & Start Adventure",
         greetingBadge: "Ahlan wa Sahlan!",
         greetingTitle: "Welcome,",
         menuSpeech: "Select a topic unit below. Each unit contains 15 multi-level objective questions. Collect ⭐ Stars and earn your Certificate of Achievement!",
@@ -932,6 +932,7 @@
       openNameModal() {
         document.getElementById('modalInputName').value = this.state.studentName;
         document.getElementById('changeNameModal').classList.remove('hidden');
+        setTimeout(() => document.getElementById('modalInputName').focus(), 50);
       }
 
       closeNameModal() {
@@ -1091,15 +1092,33 @@
               </p>
             </div>
 
-            <div class="pt-2 border-t flex items-center justify-between">
-              <span class="text-xs font-semibold text-slate-600">
-                3 Set Soalan (45 Soalan)
-              </span>
-              <button onclick="app.openSetModal('${theme.id}')" class="px-4 py-2 bg-arabic-emerald hover:bg-emerald-700 text-amber-300 font-bold rounded-xl text-xs shadow transition transform group-hover:scale-105 flex items-center gap-1">
-                <span>Pilih Set Soalan</span> <span>➡️</span>
-              </button>
-            </div>
+            <details class="set-picker pt-2 border-t">
+              <summary class="list-none cursor-pointer select-none flex items-center justify-between gap-3 rounded-xl bg-arabic-emerald hover:bg-emerald-700 px-4 py-3 text-amber-300 shadow transition">
+                <span class="text-xs sm:text-sm font-extrabold">3 Set Soalan (45 Soalan)</span>
+                <span class="font-extrabold text-xs sm:text-sm">Pilih Set Soalan ⬇️</span>
+              </summary>
+              <div class="direct-set-buttons mt-3 grid grid-cols-1 sm:grid-cols-3 gap-2">
+                ${[1, 2, 3].map(setNo => {
+                  const setKey = `${theme.id}_set${setNo}`;
+                  const prog = this.state.unitProgress[setKey] || { bestScore: 0, starsEarned: 0 };
+                  const level = setNo === 1 ? 'Asas' : setNo === 2 ? 'Sederhana' : 'Cabaran';
+                  return `
+                    <button type="button" data-set-number="${setNo}" class="direct-set-btn rounded-xl border-2 border-amber-300 bg-amber-50 hover:bg-amber-100 px-3 py-3 text-center shadow-sm transition active:scale-95">
+                      <span class="block text-sm font-extrabold text-emerald-800">Set ${setNo} (${level})</span>
+                      <span class="block mt-1 text-[11px] font-bold text-slate-600">Skor: ${prog.bestScore || 0}/15 · ⭐ ${prog.starsEarned || 0}/3</span>
+                    </button>
+                  `;
+                }).join('')}
+              </div>
+            </details>
           `;
+
+          card.querySelectorAll('.direct-set-btn').forEach(button => {
+            button.addEventListener('click', () => {
+              const setNo = Number(button.dataset.setNumber);
+              this.startQuiz(theme.id, setNo);
+            });
+          });
 
           container.appendChild(card);
         });
@@ -1385,6 +1404,26 @@
 
     function startApp() {
       if (!window.app) window.app = new QuizApp();
+
+      if (!window.appClickHandlerReady) {
+        document.querySelectorAll('[data-app-action]').forEach(control => {
+          control.addEventListener('click', (event) => {
+            const action = control.dataset.appAction;
+            if (window.app && typeof window.app[action] === 'function') {
+              event.preventDefault();
+              window.app[action]();
+            }
+          });
+        });
+
+        document.getElementById('inputStudentName').addEventListener('keydown', (event) => {
+          if (event.key === 'Enter') window.app.saveStudentName();
+        });
+        document.getElementById('modalInputName').addEventListener('keydown', (event) => {
+          if (event.key === 'Enter') window.app.saveModalName();
+        });
+        window.appClickHandlerReady = true;
+      }
     }
 
     if (document.readyState === 'loading') {
